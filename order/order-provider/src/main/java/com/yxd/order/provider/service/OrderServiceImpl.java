@@ -25,26 +25,23 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO create(String userId, String commodityCode, int orderCount) {
         int orderMoney = calculate(commodityCode, orderCount);
 
-//        log.info("【before】扣款  userId:{}, orderMoney:{}", userId, orderMoney);
+
         System.out.println("【before】扣款  userId:" + userId + " orderMoney:" + orderMoney);
         accountService.debit(userId, orderMoney);
-//        log.info("【after】扣款成功");
+
         System.out.println("【after】扣款成功");
         Order order = new Order();
         order.setUserId(userId);
         order.setCommodityCode(commodityCode);
         order.setCount(orderCount);
         order.setMoney(orderMoney);
-//        log.info("【before】创建订单 {}", order.toString());
+
         System.out.println("【before】创建订单 " + order.toString());
 //        order.insert();
         orderDAO.insert(order);
-//        log.info("【after】创建订单成功 {}", order.toString());
+
         System.out.println("【after】创建订单成功 " + order.toString());
         OrderDTO orderDTO = new OrderDTO();
-        if (orderCount == 2) {
-            throw new RuntimeException("未知异常");
-        }
         BeanUtils.copyProperties(order, orderDTO);
         return orderDTO;
     }

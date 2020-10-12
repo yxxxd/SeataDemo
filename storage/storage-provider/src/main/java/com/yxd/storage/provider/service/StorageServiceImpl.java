@@ -22,7 +22,7 @@ public class StorageServiceImpl implements StorageService {
         if (storageCount == null) {
             throw new RuntimeException("不存在的商品");
         }
-//        log.info("商品库存：{}", storageCount);
+
         System.out.println("商品库存：" + storageCount);
         if (storageCount >= count) {
 //            log.info("更新商品库存：{} --> {}", storageCount, storageCount-count);
