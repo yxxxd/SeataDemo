@@ -19,7 +19,6 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public void debit(String userId, int money) {
-        Account account = new Account();
         Account a = accountMapper.selectOne(userId);
         if (a.getMoney() >= money) {
             System.out.println("【before】扣款 " + a.getMoney() + "--> " + money);
